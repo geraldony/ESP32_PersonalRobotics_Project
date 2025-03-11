@@ -47,43 +47,31 @@ sensors_event_t tempData;
 
 mpu.getEvent(&accelData, &gyroData, &tempData);
 
-//Printing th sensor Data. 
+/* Changed Fomrmat of data for better readbility*/
 
-// Data of  Acceleration in x direction
-Serial.print("Acceleration X: ");
+// Data of  Acceleration in x,y,Z direction
+Serial.print("Acceleration (m/s^2) | X: ");
 Serial.print(accelData.acceleration.x);
-Serial.println(" ms^2, ");
-
-// Data of  Acceleration in y direction
-Serial.print("Acceleration Y: ");
+Serial.print(" | Y: ");
 Serial.print(accelData.acceleration.y);
-Serial.println(" ms^2, ");
+Serial.print(" | Z: ");
+Serial.println(accelData.acceleration.z);
 
-// Data of  Acceleration in z direction
-Serial.print("Acceleration Z: ");
-Serial.print(accelData.acceleration.z);
-Serial.println(" ms^2, ");
-
-// Data of  Gyroscope in x direction
-Serial.print("Gyroscope X: ");
+// Data of Gyroscope in x,y,z direction
+Serial.print("Gyroscope (rad/s) | X: ");
 Serial.print(gyroData.gyro.x);
-Serial.println(" rad/s, ");
-
-// Data of  Gyroscope in y direction
-Serial.print("Gyroscope Y: ");
+Serial.print(" | Y: ");
 Serial.print(gyroData.gyro.y);
-Serial.println(" rad/s, ");
+Serial.print(" | Z: ");
+Serial.println(gyroData.gyro.z);
 
-// Data of  Gyroscope in z direction
-Serial.print("Gyroscope Z: ");
-Serial.print(gyroData.gyro.z);
-Serial.println(" rad/s, ");
+// Chip Temperature Data
+Serial.print("Temperature of Chip( °C ) | :");
+Serial.println(tempData.temperature);
 
-// Temperature  of chip
-Serial.print("Temperature  of Chip: ");
-Serial.print(tempData.temperature);
-Serial.println(" degrees Celsius , ");
-delay(1000);
+Serial.println("----------------------------------");
+
+delay(5000);
 }
 
  
