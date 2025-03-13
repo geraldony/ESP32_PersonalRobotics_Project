@@ -2,11 +2,13 @@
 #include <Arduino.h> // incldues the core Ardunio functions 
 #include <Wire.h> // includes the I2C library to ensure the ESP 32 can communicate with MPU6050
 #include <Adafruit_MPU6050.h> // includes the Adafruit library we downloaded  to handle direct communication with MPU6050 sensor
-#include <Adafruit_Sensor.h> // needed to doemat sensor readings into a standard structure.
+#include <Adafruit_Sensor.h> // needed to format sensor readings into a standard structure.
+#include <ESP32Servo.h> // including the servo library
 
 /*Creating the MPU6050 Object from the Adafruit class */
 
 Adafruit_MPU6050 mpu;
+Servo servo1;  // creating  a servo object
 
 /* The Set-Up function/method */
 // The setup function runs only once the ESP 32 is powered up
@@ -15,7 +17,7 @@ void setup() {
 Serial.begin(115200); 
   Wire.begin(); // Method from the Arduino Wire library ; It initializes  I2C communication
   mpu.begin() ; // initializes MPU sensor communication (returns boolean)
-
+  
   // if statement to check if the sensor's communication is properly initialized. 
   /* if it is not properly initialized, we print it didn't work and exit the setup method */
   if(mpu.begin() == false){ 
@@ -26,6 +28,7 @@ Serial.begin(115200);
   else{
     Serial.println(" The Sensor is Connected") ;
   }
+  servo1.attach(4); // assigning GPIO 4 to  the servo
 }
 
 void loop() {
@@ -72,6 +75,18 @@ Serial.println(tempData.temperature);
 Serial.println("----------------------------------");
 
 delay(5000);
+for( int i =0 ; i <= 180 ; i=i+90){
+  servo1.write(i);
+  delay(100);
+}
+
+for( int i =180 ; i >= 0; i=i-45){
+  servo1.write(i);
+  delay(100);
+}
+
+
+
 }
 
  
